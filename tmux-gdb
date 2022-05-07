@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+echo $#
+if [ $# == 1 ]
+then
+    gdb_tool=$1
+else
+   #gdb_tool="/home/longma/opensource/qemu_linux/riscv64-lp64d--glibc--stable-2021.11-1/bin/riscv64-linux-gdb"
+    gdb_tool="mygdb"
+fi
+echo "use gdb tool ${gdb_tool}"
+
+ARGS=$ARGS\ -x\ ./gdb/gdb.init
+
+echo "init file ${ARGS}"
+
+if [ -z "$TMUX" ]
+then
+    exec_cmd="exec tmux new -n GDB"
+else
+    exec_cmd="exec tmux new-window -n GDB"
+fi
+
+$exec_cmd sh -c "$gdb_tool -x '~/.gdb/tmux_dashboard_init' $ARGS ${@@Q}; tmux kill-window -t \$TMUX_PANE"
