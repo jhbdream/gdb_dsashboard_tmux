@@ -5,7 +5,7 @@ then
     gdb_tool=$1
 else
    #gdb_tool="/home/longma/opensource/qemu_linux/riscv64-lp64d--glibc--stable-2021.11-1/bin/riscv64-linux-gdb"
-    gdb_tool="mygdb"
+    gdb_tool="gdb"
 fi
 echo "use gdb tool ${gdb_tool}"
 
