@@ -18,7 +18,7 @@ main_pane, main_tty = tmux('display-message', '-p' , '-F', '#{pane_id},#{pane_tt
 set_title(main_tty, 'main')
 
 # asm
-asm_pane, asm_tty = tmux('split-window', '-b', '-v', '-p 40', '-P', '-F', '#{pane_id},#{pane_tty}', NULLPROG).strip().split(',')
+asm_pane, asm_tty = tmux('split-window', '-b', '-v', '-P', '-F', '#{pane_id},#{pane_tty}', NULLPROG).strip().split(',')
 sp.check_call(['stty', '--file', asm_tty, '-echo'])
 set_title(asm_tty, 'asm')
 gdb.execute('dashboard assembly -output' + asm_tty)
@@ -33,7 +33,7 @@ gdb.execute('dashboard source -output' + source_tty)
 tmux('select-pane', '-t' + main_pane)
 
 # register
-reg_pane, reg_tty = tmux('split-window', '-d', '-v', '-p 25', '-P', '-F', '#{pane_id},#{pane_tty}', NULLPROG).strip().split(',')
+reg_pane, reg_tty = tmux('split-window', '-d', '-v', '-P', '-F', '#{pane_id},#{pane_tty}', NULLPROG).strip().split(',')
 set_title(reg_tty, 'reg')
 sp.check_call(['stty', '--file', reg_tty, '-echo'])
 gdb.execute('dashboard registers -output' + reg_tty)
@@ -70,3 +70,4 @@ define hookpost-load
 dashboard
 end
 # vim: set ft=python:
+

@@ -1,5 +1,2 @@
 source ~/.gdb/gdb-dashboard
 source ~/.gdb/tmux-init
-
-dashboard -layout assembly registers !memory !variables !breakpoints source !expressions !history !stack !threads
-dashboard -style syntax_highlighting 'none'

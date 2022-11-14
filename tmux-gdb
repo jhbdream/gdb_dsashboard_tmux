@@ -1,23 +1,26 @@
 #!/usr/bin/env bash
-echo $#
-if [ $# == 1 ]
+if [ $# -eq 1 ] 
 then
-    gdb_tool=$1
+	if [ $1 = "arc" ]
+	then
+		gdb_tool="/home/jihongbin/tools/arc_gnu_2021.09_prebuilt_elf32_le_linux_install/bin/arc-elf32-gdb"
+	elif [ $1 = "gdb" ]
+	then
+		gdb_tool="gdb"
+	fi
 else
-   #gdb_tool="/home/longma/opensource/qemu_linux/riscv64-lp64d--glibc--stable-2021.11-1/bin/riscv64-linux-gdb"
-    gdb_tool="gdb"
+	gdb_tool="gdb-multiarch"
 fi
-echo "use gdb tool ${gdb_tool}"
 
 ARGS=$ARGS\ -x\ ./gdb/gdb.init
 
-echo "init file ${ARGS}"
+echo "use gdb tool ${gdb_tool}"
 
 if [ -z "$TMUX" ]
 then
-    exec_cmd="exec tmux new -n GDB"
+    exec_cmd="exec tmux -T 256 new -n GDB"
 else
-    exec_cmd="exec tmux new-window -n GDB"
+    exec_cmd="exec tmux -T 256 new-window -n GDB"
 fi
 
-$exec_cmd sh -c "$gdb_tool -x '~/.gdb/tmux_dashboard_init' $ARGS ${@@Q}; tmux kill-window -t \$TMUX_PANE"
+$exec_cmd "$gdb_tool -x '~/.gdb/tmux_dashboard_init' $ARGS ; tmux kill-window -t \$TMUX_PANE"
