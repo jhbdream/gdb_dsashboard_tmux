@@ -3,10 +3,10 @@
 1. install cmd
 ```bash
 
-cp gdb ~/.gdb
-cp gdbinit ~/.gdbinit
-cp tmux.conf ~/.tmux.conf
-cp tmux-gdb /usr/local/bin/
+cp -rT gdb ~/.gdb
+cp -rT gdbinit ~/.gdbinit
+cp -rT tmux.conf ~/.tmux.conf
+cp -rT tmux-gdb /usr/local/bin/
 
 ```
 
